@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Uutiset</title>
+        <style>
+            body {
+                background-color: #979A9A;
+            .header {
+                background-color: #f1f1f1;
+                padding: 20px;
+                text-align: center;
+            }
+    </style>
+    </head>
+    
+    
+    <body>
+         <div class="header">
+            <h1>Uutiset</h1>
+        </div>
+        <div class="topnav">
+            <a th:href="@{/}">
+            <span th:text="Etusivu">Etusivu</span> 
+            </a>
+            <li th:each="kategoria : ${kategoriat}">
+                <a th:href="@{/{kategoria}(kategoria=${kategoria.nimi})}">
+                    <span th:text="${kategoria.nimi}">Kategoria</span> <br/>
+                </a>
+             </li>
+            </div>
+        
+        <h1 th:text="${uutinen.aika +'     '+ uutinen.otsikko}">Otsikko</h1>
+        
+        <h2 th:text="${uutinen.ingressi}">Ingressi</h2>
+        <img th:src="@{/uutinen/{id}/content(id=${uutinen.id})}"/><br/>
+        
+        <span th:text="${uutinen.teksti}">Sisältö</span>
+        
+    </body>
+</html>
