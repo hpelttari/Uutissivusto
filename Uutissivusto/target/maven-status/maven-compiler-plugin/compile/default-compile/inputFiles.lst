@@ -1,0 +1,8 @@
+/home/hannu/Uutissivusto/Uutissivusto/src/main/java/wad/domain/Kategoria.java
+/home/hannu/Uutissivusto/Uutissivusto/src/main/java/wad/domain/Kirjoittaja.java
+/home/hannu/Uutissivusto/Uutissivusto/src/main/java/wad/controller/UutinenController.java
+/home/hannu/Uutissivusto/Uutissivusto/src/main/java/wad/repository/KirjoittajaRepository.java
+/home/hannu/Uutissivusto/Uutissivusto/src/main/java/wad/repository/KategoriaRepository.java
+/home/hannu/Uutissivusto/Uutissivusto/src/main/java/wad/UutissivustoApplication.java
+/home/hannu/Uutissivusto/Uutissivusto/src/main/java/wad/repository/UutinenRepository.java
+/home/hannu/Uutissivusto/Uutissivusto/src/main/java/wad/domain/Uutinen.java

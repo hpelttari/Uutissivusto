@@ -144,7 +144,7 @@ public class UutinenController {
         
         model.addAttribute("uutiset", this.kategoriaRepository.findByNimi(kategoria).getUutiset());
         
-        return "kategoriat";
+        return "kategorianuutiset";
     }
     
     
