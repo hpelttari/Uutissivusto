@@ -144,9 +144,16 @@ public class UutinenController {
         
         model.addAttribute("uutiset", this.kategoriaRepository.findByNimi(kategoria).getUutiset());
         
-        return "kategorianuutiset";
+        return "kategoriat";
     }
     
-    
+    @GetMapping("/kategorianmukaan")
+    public String jarjestaKategorianMukaan(Model model){
+        
+        Pageable pageable = PageRequest.of(0,Integer.MAX_VALUE, Sort.Direction.DESC,"kategoriat");
+        model.addAttribute("kategoriat",this.kategoriaRepository.findAll());
+        model.addAttribute("uutiset",this.uutinenRepository.findAll(pageable));
+        return "järjestysKategorianMukaan";
+    }
     
 }

@@ -124,7 +124,7 @@ and open the template in the editor.
                 <h1>Viimeisimmät</h1>
                 <li th:each="uutinen : ${uutiset}">
                     <a th:href="@{/uutinen/{id}(id=${uutinen.id})}">
-                        <span th:text="${uutinen.time + ' ' +uutinen.otsikko}">Otsikko</span> <br/>
+                        <span th:text="${uutinen.aika + ' ' +uutinen.otsikko}">Otsikko</span> <br/>
                     </a>
                     <span th:text="${uutinen.ingressi}">Ingressi</span><br/> 
                         <img th:src="@{/uutinen/{id}/content(id=${uutinen.id})}"/>
