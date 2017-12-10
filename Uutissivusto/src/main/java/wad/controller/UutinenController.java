@@ -27,6 +27,8 @@ import wad.domain.*;
 import wad.repository.*;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.*;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  *
@@ -86,19 +88,22 @@ public class UutinenController {
         uutinen.setIngressi(ingressi);
         uutinen.setTeksti(teksti);
         
-        Kategoria k = new Kategoria();
-        k.setNimi(kategoria);
+        ArrayList<Uutinen> uutiset = new ArrayList();
+        
+        Kategoria k = new Kategoria(kategoria,uutiset);
+        
         
         for(Kategoria kat : this.kategoriaRepository.findAll()){
             if(kat.getNimi().equals(kategoria)){
                 k=kat;
             }
         }
-        
+        /*
         if(!this.kategoriaRepository.existsByNimi(kategoria)){
             this.kategoriaRepository.save(k);
             
-        }
+        }*/
+        this.kategoriaRepository.save(k);
         
         uutinen.getKategoriat().add(k);
         uutinen.setContent(file.getBytes());
@@ -116,10 +121,8 @@ public class UutinenController {
             this.kirjoittajaRepository.save(kirjoittaja);
         }
         
-        k.getUutinen().add(uutinen);
-        this.kategoriaRepository.save(k);
+        k.lisaaUutinen(uutinen);
         
-       
         uutinenRepository.save(uutinen);
         
         return "redirect:/hallintapaneeli";
@@ -139,7 +142,7 @@ public class UutinenController {
     @GetMapping("/{kategoria}")
     public String kategoria(@PathVariable String kategoria, Model model){
         
-        model.addAttribute("uutiset", this.kategoriaRepository.findByNimi(kategoria).getUutinen());
+        model.addAttribute("uutiset", this.kategoriaRepository.findByNimi(kategoria).getUutiset());
         
         return "kategoriat";
     }

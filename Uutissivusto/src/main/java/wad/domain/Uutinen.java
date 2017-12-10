@@ -17,11 +17,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 import java.time.LocalDateTime;
 import java.util.List;
-import javax.persistence.Basic;
-import javax.persistence.FetchType;
-import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.*;
 
 
@@ -42,7 +38,7 @@ public class Uutinen extends AbstractPersistable<Long> {
     @ManyToMany(mappedBy="uutiset")
     private List<Kirjoittaja> kirjoittajat;
     
-    @ManyToMany(mappedBy="uutinen")
+    @ManyToMany(cascade=CascadeType.ALL, mappedBy="uutiset")
     private List<Kategoria> kategoriat;
     
     public Uutinen(){
