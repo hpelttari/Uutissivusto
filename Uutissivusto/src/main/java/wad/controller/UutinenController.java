@@ -116,6 +116,9 @@ public class UutinenController {
             this.kirjoittajaRepository.save(kirjoittaja);
         }
         
+        k.getUutinen().add(uutinen);
+        this.kategoriaRepository.save(k);
+        
        
         uutinenRepository.save(uutinen);
         
