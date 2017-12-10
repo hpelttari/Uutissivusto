@@ -45,7 +45,7 @@ public class UutinenController {
     private KirjoittajaRepository kirjoittajaRepository;
     
     @GetMapping("/")
-    public String listaa(Model model){
+    public String listaaUutiset(Model model){
         
         Pageable pageable1 = PageRequest.of(0, 5, Sort.Direction.DESC, "aika");
         Pageable pageable2 = PageRequest.of(0, Integer.MAX_VALUE,Sort.Direction.DESC,"aika");
@@ -66,6 +66,79 @@ public class UutinenController {
         model.addAttribute("kategoriat", this.kategoriaRepository.findAll());
         
         return "uutinen";
+    }
+    
+    @GetMapping("/hallintapaneeli")
+    public String hallintapaneeli(Model model){
+        
+        model.addAttribute("uutiset", this.uutinenRepository.findAll());
+        model.addAttribute("kategoriat",this.kategoriaRepository.findAll());
+        
+        return "hallintapaneeli";
+    }
+    
+    @PostMapping("/hallintapaneeli")
+    @Transactional
+    public String luoUutinen(@RequestParam String kategoria, @RequestParam String otsikko, @RequestParam String ingressi, @RequestParam String teksti, @RequestParam String nimi, @RequestParam("file") MultipartFile file) throws IOException {
+        
+        Uutinen uutinen = new Uutinen();
+        uutinen.setOtsikko(otsikko);
+        uutinen.setIngressi(ingressi);
+        uutinen.setTeksti(teksti);
+        
+        Kategoria k = new Kategoria();
+        k.setNimi(kategoria);
+        
+        for(Kategoria kat : this.kategoriaRepository.findAll()){
+            if(kat.getNimi().equals(kategoria)){
+                k=kat;
+            }
+        }
+        
+        if(!this.kategoriaRepository.existsByNimi(kategoria)){
+            this.kategoriaRepository.save(k);
+            
+        }
+        
+        uutinen.getKategoriat().add(k);
+        uutinen.setContent(file.getBytes());
+        
+        Kirjoittaja kirjoittaja = new Kirjoittaja();
+        kirjoittaja.setNimi(nimi);
+        
+        for(Kirjoittaja kirj : this.kirjoittajaRepository.findAll()){
+            if(kirj.getNimi().equals(nimi)){
+                kirjoittaja=kirj;
+            }   
+        }
+        
+        if(!this.kirjoittajaRepository.existsByNimi(nimi)){
+            this.kirjoittajaRepository.save(kirjoittaja);
+        }
+        
+       
+        uutinenRepository.save(uutinen);
+        
+        return "redirect:/hallintapaneeli";
+    }
+    
+    @DeleteMapping("/uutinen/{id}")
+    public String poistaUutinen(@PathVariable Long id, Model model) {
+        
+        if(uutinenRepository.existsById(id)){
+            
+            uutinenRepository.deleteById(id);            
+            return hallintapaneeli(model);
+    }
+        return "redirect:/hallintapaneeli";
+    }
+    
+    @GetMapping("/{kategoria}")
+    public String kategoria(@PathVariable String kategoria, Model model){
+        
+        model.addAttribute("uutiset", this.kategoriaRepository.findByNimi(kategoria).getUutinen());
+        
+        return "kategoriat";
     }
     
     

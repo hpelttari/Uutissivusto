@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+   
+
+    <head>
+        <meta charset="UTF-8" />
+        <title>Uutiset</title>
+        <style>
+            body {
+                background-color: #F7DC6F;
+            }
+            .button:hover {
+                background-color: #5DADE2;
+                color: white;
+            }
+            .header {
+                background-color: #D7DBDD;
+                padding: 5px;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        
+        <div class="header">
+            <h1>Hallintapaneeli</h1>
+        </div>
+        <div class="topnav">
+            <a th:href="@{/}">
+            <span th:text="Etusivu">Etusivu</span> 
+            </a>
+            <li th:each="kategoria : ${kategoriatt}">
+                <a th:href="@{/{kategoria}(kategoria=${kategoria.nimi})}">
+                    <span th:text="${kategoria.nimi}">Kategoria</span> <br/>
+                </a>
+             </li>
+            </div>
+       
+        
+     
+
+        <ul>
+            <li th:each="uutinen : ${uutiset}">
+                <a th:href="@{/uutinen/{id}(id=${uutinen.id})}">
+                    <span th:text="${uutinen.aika + ' ' +uutinen.otsikko}">Otsikkotsikko</span> <br/>
+                </a>
+                    <span th:text="${uutinen.ingressi}">Ingressi</span> <br/>
+                    <td><form th:action="@{/uutinen/{id}(id=${uutinen.id})}" th:method="delete"><input type="submit" value="Poista" class="button"/></form></td>
+                 
+            </li>
+        </ul>
+        
+        <form th:action="@{/hallintapaneeli}" method="POST" enctype="multipart/form-data">
+            <fieldset>
+                <legend><strong>Lisää uutinen</strong></legend>
+            <p>Otsikko: <br/>
+                <input name="otsikko"></input></p>
+            <p>Ingressi:<br/>
+                <input name="ingressi"></input></p>
+            <p>Teksti:<br/> 
+                <input name="teksti"></input></p>
+            <p>Kategoria:<br/> 
+                <input name="kategoria"></input></p>
+            <p>Kirjoittaja:<br/> 
+                <input name="nimi"></input></p>
+                <p>Kuva: <br/>
+                    <input type="file" name="file" id="file"</input></p>
+            <input type="submit" value="Lisää" class="button"></input>
+            </fieldset>
+        </form>
+        <img src ="/media/image.jpeg" />
+        
+    </body>
+</html>
