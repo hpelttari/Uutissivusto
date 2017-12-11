@@ -237,7 +237,7 @@ public class UutinenController {
     
     @GetMapping("/login")
     public String loginPage(){
-        return "/login";
+        return "login";
     }
     
     @PostMapping("/login")
