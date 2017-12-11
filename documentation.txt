@@ -7,4 +7,12 @@ Sovellus on uutissivusto, jossa pystyy selaamaan uutisia ja järjestämää niit
 
 Käyttötapaukset:
 
+1. Uutisen lukeminen: Käyttäjä avaa uutissivuston, selaa etusivua ja klikkaa uutisen linkkiä, jonkä jälkeen käyttäjä pääsee lukemaan uutisen.
+
+2. Uutisten selaaminen kategorioiden perusteella: Käyttäjä klikkaa etusivulla sivupalkista haluamaansa kategoriaa, joka vie hänet sivulle, jossa näkyy kategorian sisältämät uutiset.
+
+3. Uutisen lisääminen: Käyttäjä klikkaa sivupalkista hallintapaneelia, jonka jälkeen hän kirjautuu sisään kirjautumissivulla. Tämän jälkeen käyttäjä täyttää haluamansa kentät ja painaa lisää-nappia.
+
+4. Uutisen poistaminen: Käyttäjä klikkaa sivupalkista hallintapaneelia, jonka jälkeen hän kirjautuu sisään kirjautumissivulla. Tämän jälkeen käyttäjä klikkaa poista nappia halumansa uutisen kohdalta.
+
 Parannusehdotukset:
