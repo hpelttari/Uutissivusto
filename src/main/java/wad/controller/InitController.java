@@ -34,6 +34,8 @@ import javax.servlet.http.*;
 import org.springframework.security.core.*;
 import org.springframework.security.core.userdetails.UserDetails;
 import java.time.LocalDateTime;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 /**
  *
  * @author hannu
@@ -43,9 +45,6 @@ public class InitController {
     
     @Autowired
     private AccountRepository accountRepository;
-    
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
     
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
@@ -59,6 +58,11 @@ public class InitController {
     @Autowired
     private KirjoittajaRepository kirjoittajaRepository;
     
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+    
     @PostConstruct
     @Transactional
     public void init(){
@@ -67,7 +71,7 @@ public class InitController {
     
         Account kayttaja = new Account();
         kayttaja.setUsername("hannu");
-        kayttaja.setPassword(passwordEncoder.encode("salasana"));
+        kayttaja.setPassword(passwordEncoder().encode("salasana"));
         kayttaja = this.accountRepository.save(kayttaja);
        
         

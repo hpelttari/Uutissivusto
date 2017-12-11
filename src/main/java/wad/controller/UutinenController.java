@@ -45,9 +45,6 @@ public class UutinenController {
     private AccountRepository accountRepository;
     
     @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
-    
-    @Autowired
     private CustomUserDetailsService customUserDetailsService;
     
     @Autowired
