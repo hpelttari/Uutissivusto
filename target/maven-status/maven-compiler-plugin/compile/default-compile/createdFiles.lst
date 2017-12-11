@@ -1,8 +1,8 @@
-wad/UutissivustoApplication.class
 wad/repository/KategoriaRepository.class
+wad/domain/Uutinen.class
+wad/domain/Kategoria.class
+wad/UutissivustoApplication.class
 wad/repository/KirjoittajaRepository.class
 wad/repository/UutinenRepository.class
 wad/domain/Kirjoittaja.class
 wad/controller/UutinenController.class
-wad/domain/Uutinen.class
-wad/domain/Kategoria.class
