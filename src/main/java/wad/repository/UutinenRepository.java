@@ -13,5 +13,5 @@ import wad.domain.Uutinen;
  * @author hannu
  */
 public interface UutinenRepository extends JpaRepository<Uutinen, Long>{
-    
+    boolean existsByOtsikko(String otsikko);
 }

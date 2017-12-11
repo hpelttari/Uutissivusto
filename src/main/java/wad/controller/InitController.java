@@ -41,7 +41,7 @@ import java.time.LocalDateTime;
 @Controller
 public class InitController {
     
-        @Autowired
+    @Autowired
     private AccountRepository accountRepository;
     
     @Autowired
@@ -64,12 +64,15 @@ public class InitController {
     public void init(){
         
         //Luodaan oletuskäyttäjä
+    
         Account kayttaja = new Account();
         kayttaja.setUsername("hannu");
         kayttaja.setPassword(passwordEncoder.encode("salasana"));
         kayttaja = this.accountRepository.save(kayttaja);
+       
         
         //Luodaan valmiina oleva kirjoittaja
+        
         ArrayList<Kirjoittaja> kirjoittajat = new ArrayList();
         Kirjoittaja kirjoittaja = new Kirjoittaja();
         kirjoittaja.setNimi("Hannu");
