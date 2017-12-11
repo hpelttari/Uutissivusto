@@ -204,7 +204,7 @@ public class UutinenController {
         public String edellisenViikonUutiset(Model model){
         
         Pageable pageable1 = PageRequest.of(0, Integer.MAX_VALUE, Sort.Direction.DESC, "aika");
-        Pageable pageable2 = PageRequest.of(0, Integer.MAX_VALUE,Sort.Direction.DESC,"uutistenMaara");
+        Pageable pageable2 = PageRequest.of(0, Integer.MAX_VALUE,Sort.Direction.DESC,"uutistenLKM");
         
         ArrayList viimeViikonUutiset = new ArrayList();
         LocalDateTime aika = LocalDateTime.now().minusWeeks(1);
