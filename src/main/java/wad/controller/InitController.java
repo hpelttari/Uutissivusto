@@ -70,7 +70,7 @@ public class InitController {
         //Luodaan oletuskäyttäjä
     
         Account kayttaja = new Account();
-        kayttaja.setUsername("hannu");
+        kayttaja.setUsername("oletuskäyttäjä");
         kayttaja.setPassword(passwordEncoder().encode("salasana"));
         kayttaja = this.accountRepository.save(kayttaja);
        
@@ -84,15 +84,18 @@ public class InitController {
         
         //Valmiina olevat uutiset
         Uutinen eka = new Uutinen();
-        eka.setOtsikko("Ensimäinen Uutinen");
-        eka.setIngressi("Hieno Ingressi");
-        eka.setTeksti("Kiinnostavaa asiaa");
+        eka.setOtsikko("Tiistaiksi voimakasta lumisadetta luvassa");
+        eka.setIngressi("Ajokeli muuttuu erittäin huonoksi Etelä- ja Keski-Suomessa");
+        eka.setTeksti("Lumisade alkaa maanantain ja tiistain välisenä yönä, mutta muuttuu eteläisessä Suomessa päivän mittaan räntä- ja vesisateeksi. "
+                + "Pohjoisemmassa lunta sataa koko päivän.");
         eka.setKirjoittajat(kirjoittajat);
        
         Uutinen toka = new Uutinen();
-        toka.setOtsikko("Toinen Uutinen");
-        toka.setIngressi("Vielä hienompi Ingressi");
-        toka.setTeksti("Suht kiinostavaa asiaa");
+        toka.setOtsikko("Bitcoin johdannaisten kauppa aloitettiin chicagon pörssissä");
+        toka.setIngressi("Asiantuntijat varoittelevat mahdollisesta romahduksesta");
+        toka.setTeksti("Bitcoin futuurien myynti alkoi pörssissä ja hinta nousi nopeasti 15 000 dollarista 18 000 dollariin. "
+                + "Bitcoinin hinta oli vielä vuoden alussa n. tuhat dollaria, mutta hinta on noussut nyt yli 16 000 dollarin."
+                + " Arvo perustuu kuitenkin vain ostajien odotuksiin tulevasta arvonnoususta, joten asiantuntijat ovat huolissaan romahduksesta.");
         toka.setKirjoittajat(kirjoittajat);
         
         Uutinen kolmas = new Uutinen();
@@ -104,28 +107,28 @@ public class InitController {
         ArrayList<Uutinen> uutiset = new ArrayList();
         ArrayList<Uutinen> lista = new ArrayList();
         
-        Kategoria k = new Kategoria("Jotain",uutiset);
-        Kategoria k1 = new Kategoria("Muuta",uutiset);
+        Kategoria saa = new Kategoria("Sää",uutiset);
+        Kategoria talous = new Kategoria("Talous",uutiset);
         
         lista.add(eka);
         lista.add(toka);
         lista.add(kolmas);
         
         
-        eka.getKategoriat().add(k);
-        toka.getKategoriat().add(k);
-        kolmas.getKategoriat().add(k1);
+        eka.getKategoriat().add(saa);
+        toka.getKategoriat().add(saa);
+        kolmas.getKategoriat().add(talous);
         this.uutinenRepository.saveAll(lista);
 
         
         this.kirjoittajaRepository.save(kirjoittaja);
         
-        k.lisaaUutinen(eka);
-        k.lisaaUutinen(toka);
-        k1.lisaaUutinen(kolmas);
+        saa.lisaaUutinen(eka);
+        saa.lisaaUutinen(toka);
+        talous.lisaaUutinen(kolmas);
         
-        this.kategoriaRepository.save(k);
-        this.kategoriaRepository.save(k1);
+        this.kategoriaRepository.save(saa);
+        this.kategoriaRepository.save(talous);
 
 
     }
