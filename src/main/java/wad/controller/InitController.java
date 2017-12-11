@@ -99,9 +99,10 @@ public class InitController {
         toka.setKirjoittajat(kirjoittajat);
         
         Uutinen kolmas = new Uutinen();
-        kolmas.setOtsikko("Kolmas Uutinen");
-        kolmas.setIngressi("Astetta Huonompi Ingressi");
-        kolmas.setTeksti("Samaa paskaa eri paketissa");
+        kolmas.setOtsikko("Bitcoinin hinta noussut hurjiin lukemiin");
+        kolmas.setIngressi("Hinta kävi jopa yli 16 000 dollarissa");
+        kolmas.setTeksti("Bitcoinin hinta oli korkeimmillaan jopa 16 666 dollaria, mutta laski sitten alle 15 000 dollariin."
+                + "Vuoden alussa hinta oli n. 1000 dollaria. Viikossa kurssi nousi kuitenkin yli 30 prosenttia.");
         kolmas.setKirjoittajat(kirjoittajat);
         
         ArrayList<Uutinen> uutiset = new ArrayList();
@@ -116,7 +117,7 @@ public class InitController {
         
         
         eka.getKategoriat().add(saa);
-        toka.getKategoriat().add(saa);
+        toka.getKategoriat().add(talous);
         kolmas.getKategoriat().add(talous);
         this.uutinenRepository.saveAll(lista);
 
