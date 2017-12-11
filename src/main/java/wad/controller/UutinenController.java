@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import javax.annotation.PostConstruct;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.*;
 import wad.service.CustomUserDetailsService;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import javax.servlet.http.*;
