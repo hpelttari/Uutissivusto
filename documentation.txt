@@ -4,6 +4,8 @@ Kuvaus:
 
 Sovellus on uutissivusto, jossa pystyy selaamaan uutisia ja järjestämää niitä mm. kategorian perusteella. Käyttäjätunnukset omaava käyttäjä pystyy myös kirjautumaan sovellukseen, jolloin uutisten lisääminen ja poistaminen on mahdollista.
 
+Käyttöohje:
+Etusivulla on listattuna 5 uusinta uutista ja uutisia pääsee lukemaan klikkaamalla uutisen linkkiä. Tämän listan alapuolella on lista uutisista aikajärjestyksessä Vasemmalla sivupalkissa on linkit olemassa oleville kategorioille. Näistä linkeistä pääsee selaamaan kategorian sisältämiä uutisia. Sivupalkissa on myös hallintapaneeli-linkki, joka vie kirjautumissivulle, jos käyttäjä ei ole kirjautuneena. Sovelluksella on valmiina käyttäjä, jonka käyttäjätunnus on "oletuskäyttäjä" ja salasana on "salasana". Kirjautumisen jälkeen pääsee sivulle, jossa voi lisätä ja poistaa uutisia. Ulos kirjautuminen tapahtuu kirjaudu ulos näppäimestä. Etusivulla on myös oikealla linkki, josta pääsee lukemaan edellisen viikon uutiset.
 
 Käyttötapaukset:
 
@@ -16,3 +18,5 @@ Käyttötapaukset:
 4. Uutisen poistaminen: Käyttäjä klikkaa sivupalkista hallintapaneelia, jonka jälkeen hän kirjautuu sisään kirjautumissivulla. Tämän jälkeen käyttäjä klikkaa poista nappia halumansa uutisen kohdalta.
 
 Parannusehdotukset:
+
+Sovellukseen voisi lisätä testejä, syötteen validointia ja virheviestejä. Sovellus ei myöskään toimi suurilla tietomäärillä ja uutisten pituus täytyy olla melko lyhyt. Kategorioiden uutisia selatessa näkyy myös kaikki uutiset eikä vain kyseisen kategorian uutiset.
