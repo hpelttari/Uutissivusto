@@ -249,6 +249,7 @@ public class UutinenController {
             authentication.setAuthenticated(true);
             return "redirect:/hallintapaneeli";
         }
+        
         return "login";
     }
     
