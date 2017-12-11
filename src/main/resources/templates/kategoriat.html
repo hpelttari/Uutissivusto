@@ -35,6 +35,9 @@ and open the template in the editor.
              <a th:href="@{/hallintapaneeli}">
             <span th:text="Hallintapaneeli">Hallintapaneeli</span> 
             </a>
+            <a th:href="@{/}">
+            <span th:text="Etusivu">Etusivu</span> 
+            </a>
             <li th:each="kategoria : ${kategoriat}">
                 <a th:href="@{/{kategoria}(kategoria=${kategoria.nimi})}">
                     <span th:text="${kategoria.nimi}">Kategoria</span> <br/>
@@ -46,7 +49,7 @@ and open the template in the editor.
     
         <div class="column middle">
             <ul>
-                <h1>Kaikki kategorian ---- uutiset</h1>
+                <h1>Kaikki kategorian uutiset</h1>
                 <li th:each="uutinen : ${uutiset}">
                     <a th:href="@{/uutinen/{id}(id=${uutinen.id})}">
                         <span th:text="${uutinen.aika + ' ' +uutinen.otsikko}">Otsikko</span> <br/>

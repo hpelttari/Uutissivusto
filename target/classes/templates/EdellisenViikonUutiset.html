@@ -1,9 +1,3 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
         
@@ -112,6 +106,9 @@ and open the template in the editor.
              <a th:href="@{/hallintapaneeli}">
             <span th:text="Hallintapaneeli">Hallintapaneeli</span> 
             </a>
+             <a th:href="@{/">
+            <span th:text="Etusivu">Etusivu</span> 
+            </a>
             <u th:each="kategoria : ${kategoriat}">
                 <a th:href="@{/{kategoria}(kategoria=${kategoria.nimi})}">
                     <span th:text="${kategoria.nimi}">Kategoria</span> <br/>
@@ -121,7 +118,7 @@ and open the template in the editor.
             
         <div class="column middle">
         <ul>
-                <h1>Viimeisimmät</h1>
+                <h1>Edellisen viikon uutiset</h1>
                 <li th:each="uutinen : ${uutiset}">
                     <a th:href="@{/uutinen/{id}(id=${uutinen.id})}">
                         <span th:text="${uutinen.aika + ' ' +uutinen.otsikko}">Otsikko</span> <br/>

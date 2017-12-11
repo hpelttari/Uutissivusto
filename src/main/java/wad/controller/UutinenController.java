@@ -33,6 +33,7 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import javax.servlet.http.*;
 import org.springframework.security.core.*;
 import org.springframework.security.core.userdetails.UserDetails;
+import java.time.LocalDateTime;
 /**
  *
  * @author hannu
@@ -58,69 +59,6 @@ public class UutinenController {
     @Autowired
     private KirjoittajaRepository kirjoittajaRepository;
     
-    @PostConstruct
-    @Transactional
-    public void init(){
-        
-        //Luodaan oletuskäyttäjä
-        Account kayttaja = new Account();
-        kayttaja.setUsername("hannu");
-        kayttaja.setPassword(passwordEncoder.encode("salasana"));
-        kayttaja = this.accountRepository.save(kayttaja);
-        
-        //Luodaan valmiina oleva kirjoittaja
-        ArrayList<Kirjoittaja> kirjoittajat = new ArrayList();
-        Kirjoittaja kirjoittaja = new Kirjoittaja();
-        kirjoittaja.setNimi("Hannu");
-        kirjoittajat.add(kirjoittaja);
-        
-        //Valmiina olevat uutiset
-        Uutinen eka = new Uutinen();
-        eka.setOtsikko("Ensimäinen Uutinen");
-        eka.setIngressi("Hieno Ingressi");
-        eka.setTeksti("Kiinnostavaa asiaa");
-        eka.setKirjoittajat(kirjoittajat);
-       
-        Uutinen toka = new Uutinen();
-        toka.setOtsikko("Toinen Uutinen");
-        toka.setIngressi("Vielä hienompi Ingressi");
-        toka.setTeksti("Suht kiinostavaa asiaa");
-        toka.setKirjoittajat(kirjoittajat);
-        
-        Uutinen kolmas = new Uutinen();
-        kolmas.setOtsikko("Kolmas Uutinen");
-        kolmas.setIngressi("Astetta Huonompi Ingressi");
-        kolmas.setTeksti("Samaa paskaa eri paketissa");
-        kolmas.setKirjoittajat(kirjoittajat);
-        
-        ArrayList<Uutinen> uutiset = new ArrayList();
-        ArrayList<Uutinen> lista = new ArrayList();
-        
-        Kategoria k = new Kategoria("Jotain",uutiset);
-        Kategoria k1 = new Kategoria("Muuta",uutiset);
-        
-        lista.add(eka);
-        lista.add(toka);
-        lista.add(kolmas);
-        
-        
-        eka.getKategoriat().add(k);
-        toka.getKategoriat().add(k);
-        kolmas.getKategoriat().add(k1);
-        this.uutinenRepository.saveAll(lista);
-
-        
-        this.kirjoittajaRepository.save(kirjoittaja);
-        
-        k.lisaaUutinen(eka);
-        k.lisaaUutinen(toka);
-        k1.lisaaUutinen(kolmas);
-        
-        this.kategoriaRepository.save(k);
-        this.kategoriaRepository.save(k1);
-
-
-    }
     
     //Uutisten listaus etusivulla
     @GetMapping("/")
@@ -261,6 +199,27 @@ public class UutinenController {
         }
         return "redirect:/";
     }
+    
+    @GetMapping("/Edellisen_viikon_uutiset")
+        public String edellisenViikonUutiset(Model model){
+        
+        Pageable pageable1 = PageRequest.of(0, Integer.MAX_VALUE, Sort.Direction.DESC, "aika");
+        Pageable pageable2 = PageRequest.of(0, Integer.MAX_VALUE,Sort.Direction.DESC,"uutistenMaara");
+        
+        ArrayList viimeViikonUutiset = new ArrayList();
+        LocalDateTime aika = LocalDateTime.now().minusWeeks(1);
+        for(Uutinen uutinen : this.uutinenRepository.findAll()){
+            if(uutinen.getAika().isAfter(aika)){
+                viimeViikonUutiset.add(uutinen);
+            }
+        }
+        model.addAttribute("uutiset", viimeViikonUutiset);
+        model.addAttribute("uusimmatUutiset", this.uutinenRepository.findAll(pageable1));
+        model.addAttribute("enitenUutisia",this.kategoriaRepository.findAll(pageable2));
+        
+        return "EdellisenViikonUutiset";
+        }
+    
     
     
 }
