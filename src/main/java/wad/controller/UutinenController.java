@@ -240,7 +240,7 @@ public class UutinenController {
         return "/login";
     }
     
-    @PostMapping("login")
+    @PostMapping("/login")
     public String login(@RequestParam String kayttajatunnus, @RequestParam String salasana){
         
         if(this.customUserDetailsService.loadUserByUsername(kayttajatunnus).getPassword().equals(salasana)){
