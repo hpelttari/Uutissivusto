@@ -13,6 +13,8 @@ import org.springframework.boot.jdbc.DataSourceBuilder;
  *
  * @author hannu
  */
+
+//Luokka Herokua varten
 @Configuration
 @Profile("production")
 public class ProductionProfile {

@@ -61,16 +61,19 @@ public class UutinenController {
     @Transactional
     public void init(){
         
+        //Luodaan oletuskäyttäjä
         Account kayttaja = new Account();
         kayttaja.setUsername("hannu");
         kayttaja.setPassword(passwordEncoder.encode("salasana"));
         kayttaja = this.accountRepository.save(kayttaja);
         
+        //Luodaan valmiina oleva kirjoittaja
         ArrayList<Kirjoittaja> kirjoittajat = new ArrayList();
         Kirjoittaja kirjoittaja = new Kirjoittaja();
         kirjoittaja.setNimi("Hannu");
         kirjoittajat.add(kirjoittaja);
         
+        //Valmiina olevat uutiset
         Uutinen eka = new Uutinen();
         eka.setOtsikko("Ensimäinen Uutinen");
         eka.setIngressi("Hieno Ingressi");
@@ -118,6 +121,7 @@ public class UutinenController {
 
     }
     
+    //Uutisten listaus etusivulla
     @GetMapping("/")
     public String listaaUutiset(Model model){
         
@@ -131,6 +135,7 @@ public class UutinenController {
         return "uutiset";
     }
     
+    //Näytetään tietyn uutisen uutissivu
     @GetMapping("/uutinen/{id}")
     public String naytaUutinen(@PathVariable Long id, Model model){
         
@@ -141,6 +146,7 @@ public class UutinenController {
         
         return "uutinen";
     }
+    
     
     @GetMapping("/hallintapaneeli")
     public String hallintapaneeli(Model model){

@@ -13,7 +13,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages={
+"wad", "wad.config", "wad.controller", "wad.domain", "wad.profile", "wad.repository", "wad.service"})
 public class UutissivustoApplication {
     
     
