@@ -16,12 +16,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import wad.domain.*;
 import wad.repository.*;
@@ -30,13 +25,28 @@ import org.springframework.stereotype.*;
 import java.util.List;
 import java.util.ArrayList;
 import javax.annotation.PostConstruct;
-
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import wad.service.CustomUserDetailsService;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+import javax.servlet.http.*;
+import org.springframework.security.core.*;
+import org.springframework.security.core.userdetails.UserDetails;
 /**
  *
  * @author hannu
  */
 @Controller
 public class UutinenController {
+    
+    @Autowired
+    private AccountRepository accountRepository;
+    
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+    
+    @Autowired
+    private CustomUserDetailsService customUserDetailsService;
     
     @Autowired
     private UutinenRepository uutinenRepository;
@@ -50,6 +60,11 @@ public class UutinenController {
     @PostConstruct
     @Transactional
     public void init(){
+        
+        Account kayttaja = new Account();
+        kayttaja.setUsername("hannu");
+        kayttaja.setPassword(passwordEncoder.encode("salasana"));
+        kayttaja = this.accountRepository.save(kayttaja);
         
         ArrayList<Kirjoittaja> kirjoittajat = new ArrayList();
         Kirjoittaja kirjoittaja = new Kirjoittaja();
@@ -212,5 +227,32 @@ public class UutinenController {
         model.addAttribute("uutiset",this.uutinenRepository.findAll(pageable));
         return "järjestysKategorianMukaan";
     }
+    
+    @GetMapping("/login")
+    public String loginPage(){
+        return "/login";
+    }
+    
+    @PostMapping("login")
+    public String login(@RequestParam String kayttajatunnus, @RequestParam String salasana){
+        
+        if(this.customUserDetailsService.loadUserByUsername(kayttajatunnus).getPassword().equals(salasana)){
+            UserDetails userDetails = this.customUserDetailsService.loadUserByUsername(kayttajatunnus);
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            authentication.setAuthenticated(true);
+            return "redirect:/hallintapaneeli";
+        }
+        return "login";
+    }
+    
+    @RequestMapping(value="/logout", method = RequestMethod.GET)
+    public String logout(HttpServletRequest request, HttpServletResponse response){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(authentication != null){
+            new SecurityContextLogoutHandler().logout(request, response, authentication);
+        }
+        return "redirect:/";
+    }
+    
     
 }
