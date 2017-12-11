@@ -94,8 +94,7 @@ public class InitController {
         toka.setOtsikko("Bitcoin johdannaisten kauppa aloitettiin chicagon pörssissä");
         toka.setIngressi("Asiantuntijat varoittelevat mahdollisesta romahduksesta");
         toka.setTeksti("Bitcoin futuurien myynti alkoi pörssissä ja hinta nousi nopeasti 15 000 dollarista 18 000 dollariin. "
-                + "Bitcoinin hinta oli vielä vuoden alussa n. tuhat dollaria, mutta hinta on noussut nyt yli 16 000 dollarin."
-                + " Arvo perustuu kuitenkin vain ostajien odotuksiin tulevasta arvonnoususta, joten asiantuntijat ovat huolissaan romahduksesta.");
+                + "Bitcoinin hinta oli vielä vuoden alussa n. tuhat dollaria, mutta hinta on noussut nyt yli 16 000 dollarin.");
         toka.setKirjoittajat(kirjoittajat);
         
         Uutinen kolmas = new Uutinen();
